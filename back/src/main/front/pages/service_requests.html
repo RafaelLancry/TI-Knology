@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações de Serviço</title>
+    <link rel="stylesheet" href="../css/serviceRequests.css">
+</head>
+<body>
+    <header>
+        <h1>Solicitações de Serviço</h1>
+        <!-- Exibição do nome e email do usuário -->
+        <p id="userName">Login: Nome do Usuário</p>
+        <!-- Links para a página inicial e logout -->
+        <nav>
+            <a href="index.html" class="header-link">Página Inicial</a>
+            <a href="login.html" onclick="logout()" class="header-link">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seleção de tipo de serviço -->
+        <label for="serviceType">Tipo de Serviço:</label>
+        <select id="serviceType" onchange="updateServiceDetails()">
+        </select>
+
+
+        <p>Preço: <span id="servicePrice">-</span></p>
+        <p>Prazo: <span id="serviceDeadline">-</span></p>
+        <p>Data Prevista de Conclusão: <span id="expectedDate">-</span></p>
+
+        <button onclick="addRequest()">Adicionar Solicitação</button>
+        <button onclick="openPaymentModal()">Finalizar Compra</button>
+
+        <!-- Exibição do valor parcial fixo acima da tabela -->
+        <div>
+            <h3>Valor Parcial: <span id="partialValue">R$ 0,00</span></h3>
+        </div>
+        
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Serviço</th>
+                    <th>Status</th>
+                    <th>Preço</th>
+                    <th>Prazo</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="serviceRequestsTableBody">
+                <!-- Linhas de solicitação serão adicionadas dinamicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal para seleção de forma de pagamento -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h2>Escolha a Forma de Pagamento</h2>
+            <!-- Exibição do valor total com impostos e frete -->
+            <h3>Valor Parcial: <span id="modalPartialValue">R$ 0,00</span></h3>
+            <h3>Impostos (10%): <span id="taxesValue">R$ 0,00</span></h3>
+            <h3>Frete: <span id="shippingValue">R$ 50,00</span></h3>
+            <h3>Valor Total: <span id="totalValue">R$ 0,00</span></h3>
+
+            <div>
+                <!-- Opções de pagamento com imagens de Visa, MasterCard e Pix -->
+                <img src="../img/visa.png" alt="Visa" class="payment-option" onclick="selectPaymentMethod('visa')">
+                <img src="../img/mastercard.png" alt="MasterCard" class="payment-option" onclick="selectPaymentMethod('mastercard')">
+                <img src="../img/pix.png" alt="Pix" class="payment-option" onclick="selectPaymentMethod('pix')">
+            </div>
+            
+            <!-- Formulário para dados do cartão de crédito -->
+            <div id="creditCardForm">
+                <h3>Insira os dados do Cartão</h3>
+                <input type="text" id="cardNumber" placeholder="Número do Cartão"><br>
+                <input type="text" id="cardName" placeholder="Nome no Cartão"><br>
+                <input type="text" id="cardCVC" placeholder="CVC"><br>
+                <button onclick="finalizarCompra()">Confirmar Pagamento</button>
+            </div>
+            
+            <!-- QR Code para pagamento via Pix -->
+            <div id="qrCodePix">
+                <h3>Escaneie o QR Code com seu aplicativo de banco</h3>
+                <img src="../img/qrcode.png" alt="QR Code para Pix" style="width: 150px; height: 150px;">
+            </div>
+            
+            <button onclick="closePaymentModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="../js/serviceRequests.js"></script>
+</body>
+</html>

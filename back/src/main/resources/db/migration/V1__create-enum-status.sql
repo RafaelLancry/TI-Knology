@@ -1,0 +1,7 @@
+CREATE TYPE Status AS ENUM (
+    'AGUARDANDO PAGAMENTO',
+    'EM ELABORAÇÃO',
+    'PAUSADO',
+    'CANCELADO',
+    'CONCLUIDO'
+);
