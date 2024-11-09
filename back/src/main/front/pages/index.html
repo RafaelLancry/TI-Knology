@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa de Serviços de TI</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body>
+    <header>
+        <img src="../img/Logo.jpg" alt="Logo da Empresa">
+        <h1>Bem-vindo à TI-Knology</h1>
+        <nav>
+            <a href="../pages/login.html" id="loginLink">Login</a>
+            <a href="../pages/register.html" id="registerLink">Cadastrar</a>
+            <a href="../pages/service_requests.html" id="serviceContractLink" style="display: none;">Contrato de Serviço</a>
+            <a href="#" id="logoutLink" style="display: none;" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Seção Sobre Nós -->
+        <section class="about">
+            <h2>Sobre Nós</h2>
+            <div class="section-content">
+                <p>Fundada em 2010 por Thiago Menezes Duarte, Luísa Carvalho Santana e Pedro Henrique Vasconcelos, a TI-Knology surgiu com a missão de impulsionar a transformação digital das empresas brasileiras. Os três fundadores uniram suas habilidades complementares para criar uma empresa que oferecesse soluções tecnológicas inovadoras e acessíveis.</p>
+                <iframe src="https://www.youtube.com/embed/f8ecM0zS7mw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+        
+        <!-- Seção Nossas Instalações -->
+        <section class="gallery">
+            <h2>Nossas Instalações</h2>
+            <div class="section-content gallery-images">
+                <img src="../img/inst1.jpg" alt="Instalação 1" onclick="openModal('../img/inst1.jpg')">
+                <img src="../img/inst2.jpg" alt="Instalação 2" onclick="openModal('../img/inst2.jpg')">
+                <img src="../img/inst3.jpg" alt="Instalação 3" onclick="openModal('../img/inst3.jpg')">
+                <img src="../img/inst4.jpg" alt="Instalação 4" onclick="openModal('../img/inst4.jpg')">
+            </div>
+        </section>
+        
+        <!-- Seção Serviços Oferecidos em Tabela -->
+        <section class="services">
+            <h2>Serviços Oferecidos</h2>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <td>Desenvolvimento de Software Personalizado</td>
+                        <td>
+                            <button onclick="toggleVisibility('service1', this)">Ver Mais</button>
+                            <p id="service1" style="display: none;">
+                                A TI-Knology cria soluções de software sob medida para atender às necessidades específicas de cada cliente, incluindo aplicativos web, móveis e corporativos que são escaláveis e integrados aos sistemas existentes.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Consultoria em Transformação Digital</td>
+                        <td>
+                            <button onclick="toggleVisibility('service2', this)">Ver Mais</button>
+                            <p id="service2" style="display: none;">
+                                Ajudamos empresas a modernizar seus processos e operações por meio de estratégias digitais eficazes, com análise do ambiente atual, identificação de oportunidades e implementação de tecnologias inovadoras.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Soluções em Nuvem</td>
+                        <td>
+                            <button onclick="toggleVisibility('service3', this)">Ver Mais</button>
+                            <p id="service3" style="display: none;">
+                                Oferecemos serviços completos de migração para a nuvem, gerenciamento de infraestrutura e desenvolvimento de aplicações nativas em nuvem, garantindo uma transição segura para um ambiente moderno.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Inteligência Artificial e Aprendizado de Máquina</td>
+                        <td>
+                            <button onclick="toggleVisibility('service4', this)">Ver Mais</button>
+                            <p id="service4" style="display: none;">
+                                Desenvolvemos e implementamos algoritmos avançados de IA e aprendizado de máquina para automatizar processos, melhorar a eficiência e gerar insights valiosos, integrando-os aos fluxos de trabalho existentes.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Soluções de Internet das Coisas (IoT)</td>
+                        <td>
+                            <button onclick="toggleVisibility('service5', this)">Ver Mais</button>
+                            <p id="service5" style="display: none;">
+                                Integramos dispositivos e sistemas para coletar e analisar dados em tempo real, permitindo que as empresas monitorem operações, otimizem recursos e criem novos modelos de negócio baseados em IoT.
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Seção Fundadores -->
+        <section class="team">
+            <h2>Fundadores</h2>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <td>CTO</td>
+                        <td>Thiago Menezes Duarte</td>
+                        <td>
+                            <button onclick="toggleVisibility('cv-thiago', this)">Ver Mais</button>
+                            <p id="cv-thiago" class="cv-text" style="display: none;">
+                                Thiago é um engenheiro de software com mais de 15 anos de experiência na indústria de tecnologia. Formado em Ciência da Computação pela Universidade Federal de Santa Catarina, ele se especializou em inteligência artificial e aprendizado de máquina. Antes de cofundar a empresa, Thiago trabalhou em empresas líderes do setor, desenvolvendo algoritmos avançados e soluções inovadoras que otimizaram processos e aumentaram a eficiência operacional.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CXO</td>
+                        <td>Luísa Carvalho Santana</td>
+                        <td>
+                            <button onclick="toggleVisibility('cv-luisa', this)">Ver Mais</button>
+                            <p id="cv-luisa" class="cv-text" style="display: none;">
+                                Luísa é especialista em design de experiência do usuário (UX) com um histórico sólido em criar interfaces intuitivas para aplicações complexas. Graduada em Design Digital pela Pontifícia Universidade Católica do Rio Grande do Sul, ela traz para a empresa sua paixão por tornar a tecnologia acessível e fácil de usar. Luísa já liderou equipes de design em várias startups de sucesso, contribuindo para produtos que ganharam prêmios no setor.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CEO</td>
+                        <td>Pedro Henrique Vasconcelos</td>
+                        <td>
+                            <button onclick="toggleVisibility('cv-pedro', this)">Ver Mais</button>
+                            <p id="cv-pedro" class="cv-text" style="display: none;">
+                                Pedro Henrique é um estrategista de negócios com foco em tecnologia e inovação. Com MBA em Gestão Estratégica pela Fundação Dom Cabral, ele tem um talento natural para identificar tendências de mercado e transformar ideias em produtos viáveis. Antes de fundar a empresa, Pedro Henrique atuou como consultor para grandes corporações, ajudando-as a navegar pelo cenário digital em constante mudança e a implementar soluções tecnológicas eficazes.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <ul class="contact">
+            <li>Telefone: (11) 1111-1111</li>
+            <li>WhatsApp: (11) 2222-2222</li>
+            <li><a href="mailto:contato@tiknology.com">contato@tiknology.com</a></li>
+        </ul>
+        <address>Endereço da empresa</address>
+        <div class="payment">
+            <img src="../img/visa.png" alt="Visa">
+            <img src="../img/mastercard.png" alt="Mastercard">
+            <img src="../img/pix.png" alt="Pix">
+        </div>
+    </footer>
+
+    <!-- Modal para exibir a imagem em tamanho maior -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <!-- Scripts externos -->
+    <script src="../js/gallery.js"></script>
+    <script src="../js/toggleVisibility.js"></script>
+    <script src="../js/loginStatus.js"></script>
+</body>
+</html>

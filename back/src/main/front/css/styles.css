@@ -1,0 +1,332 @@
+/* Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column; /* Coloca o header no topo e o conteúdo abaixo */
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap; /* Permite que as seções quebrem linha se necessário */
+    gap: 10px; /* Espaço entre as seções */
+    justify-content: center; /* Centraliza as seções */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #004085;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #ffd700;
+}
+
+/* Estilos para as Seções */
+section {
+    flex: 1 1 50%; /* Cada seção ocupa cerca de 45% da largura da linha, ajustável conforme o espaço */
+    min-width: 300px; /* Define um mínimo para evitar que as seções fiquem muito estreitas */
+    max-width: 600px; /* Limita a largura máxima de cada seção */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+h2 {
+    background-color: #004085;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Centralizar e estilizar conteúdo das seções */
+.section-content {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Galeria de Imagens */
+.gallery-images {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-images img {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-images img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal para exibir a imagem em tamanho maior */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff0000;
+}
+
+/* Tabela de Fundadores */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #004085;
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f4f4f4;
+}
+
+/* Responsividade para telas menores (smartphones) */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column; /* Empilha as seções verticalmente em telas pequenas */
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .gallery-images img {
+        width: 120px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        padding: 8px;
+    }
+
+    table th, table td {
+        padding: 10px;
+    }
+
+    .close {
+        font-size: 30px;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+
+/* Estilo para os ícones de pagamento no rodapé */
+.payment img {
+    width: 40px; /* Define uma largura padrão */
+    height: auto; /* Mantém a proporção da altura */
+    margin: 5px; /* Adiciona um espaçamento entre as imagens */
+    filter: grayscale(100%); /* Opcional: coloca em escala de cinza */
+    transition: filter 0.3s ease; /* Efeito de transição para hover */
+}
+
+.payment img:hover {
+    filter: grayscale(0%); /* Retira o filtro ao passar o mouse */
+}
+
+/* Estilos para os botões "Ver CV" */
+button {
+    padding: 8px 16px;
+    background-color: #004085;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #003366;
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #ddd;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+footer ul.contact {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul.contact li {
+    margin-bottom: 5px;
+}
+
+footer a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Justificar texto da seção "Sobre Nós" */
+.about .section-content p {
+    text-align: justify;
+}
+
+/* Centralizar o vídeo da seção "Sobre Nós" */
+.about .section-content iframe {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+}
+
+/* Estilo para o Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #004085;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Estilo para o logo à esquerda */
+header img {
+    max-width: 120px;
+    height: auto;
+    margin-right: 20px;
+}
+
+/* Estilo para o conteúdo à direita (título e navegação) */
+header h1 {
+    font-size: 2rem;
+    margin: 0 20px 0 0;
+    letter-spacing: 1px;
+}
+
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #ffd700;
+}
