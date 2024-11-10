@@ -1,7 +1,7 @@
-CREATE TABLE "services" (
+CREATE TABLE "service" (
     "id" bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" text NOT NULL,
-    "status" Status NOT NULL DEFAULT 'AGUARDANDO PAGAMENTO',
+    "status" Status NOT NULL DEFAULT 'ANALISE',
     "price" numeric NOT NULL,
     "due" integer,
     "deliver_date" date,

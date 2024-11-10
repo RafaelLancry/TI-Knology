@@ -6,10 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -21,14 +22,8 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user; // Relacionamento com User
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Service service; // Relacionamento com Service
-
-    public Cart(User user, Service service) {
-        this.user = user;
-        this.service = service;
-    }
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true) // Relacionamento com Purchase
+    private List<Purchase> purchases = new ArrayList<>();
 }

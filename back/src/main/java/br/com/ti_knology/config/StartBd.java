@@ -36,13 +36,13 @@ public class StartBd implements CommandLineRunner {
             Category categoryConsultoria = categoryRepository.findByName("Consultoria");
 
             // Adiciona serviços
-            serviceRepository.insertService("Desenvolvimento de Software", Status.AGUARDANDO_PAGAMENTO.name(), 5000.00F, 30, null, categoryDev.getId());
-            serviceRepository.insertService("Consultoria em TI", Status.AGUARDANDO_PAGAMENTO.name(), 3000.00F, 15, null, categoryConsultoria.getId());
-            serviceRepository.insertService("Soluções em Nuvem", Status.AGUARDANDO_PAGAMENTO.name(), 4000.00F, 20, null, categoryConsultoria.getId());
-            serviceRepository.insertService("Desenvolvimento de Software Personalizado", Status.AGUARDANDO_PAGAMENTO.name(), 8000.00F, 45, null, categoryDev.getId());
-            serviceRepository.insertService("Consultoria em Transformação Digital", Status.AGUARDANDO_PAGAMENTO.name(), 7000.00F, 25, null, categoryConsultoria.getId());
-            serviceRepository.insertService("Inteligência Artificial e Aprendizado de Máquina", Status.AGUARDANDO_PAGAMENTO.name(), 12000.00F, 60, null, categoryDev.getId());
-            serviceRepository.insertService("Soluções de Internet das Coisas (IoT)", Status.AGUARDANDO_PAGAMENTO.name(), 9000.00F, 50, null, categoryConsultoria.getId());
+            serviceRepository.insertService("Desenvolvimento de Software", Status.ANALISE.name(), 5000.00F, 30, null, categoryDev.getId());
+            serviceRepository.insertService("Consultoria em TI", Status.ANALISE.name(), 3000.00F, 15, null, categoryConsultoria.getId());
+            serviceRepository.insertService("Soluções em Nuvem", Status.ANALISE.name(), 4000.00F, 20, null, categoryConsultoria.getId());
+            serviceRepository.insertService("Desenvolvimento de Software Personalizado", Status.ANALISE.name(), 8000.00F, 45, null, categoryDev.getId());
+            serviceRepository.insertService("Consultoria em Transformação Digital", Status.ANALISE.name(), 7000.00F, 25, null, categoryConsultoria.getId());
+            serviceRepository.insertService("Inteligência Artificial e Aprendizado de Máquina", Status.ANALISE.name(), 12000.00F, 60, null, categoryDev.getId());
+            serviceRepository.insertService("Soluções de Internet das Coisas (IoT)", Status.ANALISE.name(), 9000.00F, 50, null, categoryConsultoria.getId());
 
             System.out.println("Serviços adicionados ao banco de dados.");
         }
