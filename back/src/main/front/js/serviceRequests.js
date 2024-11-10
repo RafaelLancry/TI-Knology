@@ -15,7 +15,7 @@ async function fetchServices() {
 
         // Adiciona novos serviços ao select
         services.forEach(service => {
-            if(service.status == "AGUARDANDO_PAGAMENTO"){
+            if(service.status == "ANALISE"){
                 const option = document.createElement("option");
                 option.value = service.name; // Aqui usamos o nome do serviço
                 option.textContent = service.name;

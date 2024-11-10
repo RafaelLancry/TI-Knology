@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const serviceContractLink = document.getElementById("serviceContractLink");
     if (serviceContractLink) {
         serviceContractLink.style.display = isLoggedIn ? "block" : "none";
+        profileLink.style.display = isLoggedIn ? "block" : "none";
     }
 
     const loginLink = document.getElementById("loginLink");

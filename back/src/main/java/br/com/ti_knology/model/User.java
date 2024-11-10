@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -31,10 +31,6 @@ public class User {
 
     @Column(unique = true)
     private String phone;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;  // Relacionamento com Cart (um usuário pode ter um carrinho)
 
     public User(UserUpdateDTO userData){
         this.cpf = userData.cpf();
