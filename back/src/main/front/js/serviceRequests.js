@@ -187,83 +187,49 @@ function selectPaymentMethod(method) {
 }
 
 async function finalizarCompra() {
+    const userId = localStorage.getItem("userId"); // Obtém o ID do usuário do localStorage
     const serviceRequests = JSON.parse(localStorage.getItem("serviceRequests") || "[]");
 
-    // Verifica se existem solicitações para finalizar a compra
     if (serviceRequests.length === 0) {
         alert("Não há solicitações de serviço para finalizar a compra.");
         return;
     }
 
-    // Coleta os dados do cartão de crédito
-    const cardData = {
-        cardNumber: document.getElementById("cardNumber").value,
-        cardName: document.getElementById("cardName").value,
-        cardCVC: document.getElementById("cardCVC").value
-    };
+    const serviceIds = serviceRequests.map(request => request.id);
 
-    // Validação dos dados do cartão de crédito
-    if (!cardData.cardNumber || !cardData.cardName || !cardData.cardCVC) {
-        alert("Por favor, preencha todos os dados do cartão.");
-        return;
-    }
+    const serviceIdsString = serviceIds.join(',');
 
-    // Prepare os dados para enviar
-    const paymentData = {
-        userId: localStorage.getItem("userId"), // ID do usuário
-        servicesId: [] // Array para armazenar os IDs dos serviços
-    };
-    
-    // Preenche o array servicesId com os IDs dos serviços selecionados na tabela
-    serviceRequests.forEach(request => {
-        paymentData.servicesId.push(String(request.id));
-    });
 
-    console.log(JSON.stringify({
-        userId: paymentData.userId,
-        servicesId: paymentData.servicesId }));
-    let data;
-    // Faz o fetch para enviar os dados de pagamento
-    await fetch("http://localhost:8080/services/payment", {
+    // Faz o fetch para enviar os dados de compra
+    fetch(`http://localhost:8080/pagamento/confirmar/${userId}?serviceIds=${serviceIdsString}`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            userId: paymentData.userId,
-            servicesId: paymentData.servicesId 
-        }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log(response);
-        return response.json(); // Retorna a resposta em JSON
-    }).then((data) =>{
-        console.log("DATA: ", data)
-        for(let i = 0; i<services.length; i++){
-            if(services[i].name === data[i]?.name){
-                services[i] = data[i];
-                services[i].status = "EM ELABORAÇÃO";
+    }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        }
-    })
-    
-    console.log(services)
-    localStorage.removeItem("serviceRequests");
-    renderServiceRequests(); // Atualiza a tabela
-    updatePartialValue(); // Atualiza o valor parcial
-    closePaymentModal(); // Fecha o modal de pagamento
-    alert("Compra finalizada com sucesso!");
+            return response.json();
+    }).then(data => {
+        console.log("Compras criadas:", data);
+        localStorage.removeItem("serviceRequests"); // Limpa as solicitações
+        renderServiceRequests(); // Atualiza a tabela
+        updatePartialValue(); // Atualiza o valor parcial
+        closePaymentModal(); // Fecha o modal de pagamento
+        alert("Compra finalizada com sucesso!");
+    }).catch(error => {
+        console.error("Erro ao confirmar compra:", error);
+        alert("Houve um erro ao finalizar a compra. Tente novamente.");
+    });
 }
 
 
 // Evento para carregar dados ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
     fetchUserData();
-    fetchServices(); // Carrega os serviços ao iniciar
+    fetchServices();
     renderServiceRequests();
     updatePartialValue();
 });

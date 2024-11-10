@@ -1,20 +1,23 @@
 package br.com.ti_knology.controller;
 
+import br.com.ti_knology.enums.ServicesType;
+import br.com.ti_knology.enums.Status;
 import br.com.ti_knology.model.Cart;
 import br.com.ti_knology.model.Purchase;
-import br.com.ti_knology.model.PurchaseId;
 import br.com.ti_knology.model.Service;
 import br.com.ti_knology.repository.CartRepository;
+import br.com.ti_knology.repository.PurchaseRepository;
 import br.com.ti_knology.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/carts")
+@RequestMapping("/pagamento")
 public class CartController {
 
     @Autowired
@@ -22,26 +25,25 @@ public class CartController {
 
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
-    @PostMapping("/{cartId}/purchase")
-    public ResponseEntity<List<Purchase>> createPurchase(@PathVariable Long cartId, @RequestParam List<Long> serviceIds) {
-        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found"));
+    @PostMapping("/confirmar/{userId}")
+    public ResponseEntity<List<Purchase>> createPurchase(@PathVariable String userId, @RequestParam List<Long> serviceIds) {
+        Cart cart = cartRepository.findByUserId(Long.parseLong(userId));
 
         List<Purchase> purchases = new ArrayList<>();
         for (Long serviceId : serviceIds) {
-            Service service = serviceRepository.findById(serviceId).orElseThrow(() -> new RuntimeException("Service not found"));
-
-            PurchaseId purchaseId = new PurchaseId(cartId, serviceId);
-            Purchase purchase = new Purchase(purchaseId, cart, service);
+            Service referenceService = serviceRepository.findById(serviceId).get();
+            LocalDate novaData = LocalDate.now();
+            novaData = novaData.plusDays(referenceService.getDue());
+            Long newServiceId = (long) serviceRepository.insertService(ServicesType.fromId(serviceId).name(), Status.PRODUZINDO.name(), referenceService.getPrice(), referenceService.getDue(), java.sql.Date.valueOf(novaData), referenceService.getCategory().getId());
+            Service newService = serviceRepository.findById(newServiceId).get();
+            Purchase purchase = new Purchase(cart, newService);
+            purchaseRepository.save(purchase);
             purchases.add(purchase);
         }
 
-        // Salva todas as compras no banco
-        for (Purchase purchase : purchases) {
-            cart.getPurchases().add(purchase); // Adiciona a compra ao carrinho
-        }
-        cartRepository.save(cart); // Salva o carrinho com as compras
-
-        return ResponseEntity.ok(purchases); // Retorna as compras criadas
+        return ResponseEntity.ok().body(purchases);
     }
 }

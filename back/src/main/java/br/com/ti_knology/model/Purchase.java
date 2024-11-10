@@ -12,19 +12,23 @@ import java.util.List;
 @Table(name = "purchase")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "purchase_id")
 @Getter
 public class Purchase {
-    @EmbeddedId
-    private PurchaseId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long purchase_id;
 
     @ManyToOne
-    @MapsId("cartId")
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false) // Chave estrangeira para o serviço
-    private Service service; // Associa o serviço à compra
+    @JoinColumn(name = "service_id", nullable = false)
+    private Service service;
 
+    public Purchase(Cart cart, Service service) {
+        this.cart = cart;
+        this.service = service;
+    }
 }

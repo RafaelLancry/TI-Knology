@@ -1,7 +1,5 @@
-// Exibir dados do usuário ao carregar a página
 
 
-// Carregar e exibir os serviços contratados
 function loadContractedServices() {
     const servicesTableBody = document.getElementById("servicesTableBody");
     const services = JSON.parse(localStorage.getItem("serviceRequests") || "[]");
@@ -21,7 +19,7 @@ function loadContractedServices() {
 }
 
 async function fetchUserData() {
-    var dataReturn = null;
+    let dataReturn;
     const userId = localStorage.getItem("userId");
 
     if (!userId) {
@@ -45,7 +43,7 @@ async function fetchUserData() {
     }).then(data => {
         dataReturn = data;
     }).catch( error => {
-        alert("Credenciais inválidas. Tente novamente.", error);
+        alert("Credenciais inválidas. Tente novamente.");
     })
 
     userDataValidation(dataReturn)
@@ -55,8 +53,61 @@ function userDataValidation(data){
     document.getElementById("userName").textContent = data.name;
     document.getElementById("userEmail").textContent = data.email;
     loadContractedServices();
-}    
+}
+
+async function fetchAcquiredServices(){
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        alert("ID do usuário não encontrado. Você precisa fazer login.");
+        return;
+    }
+
+    fetch(`http://localhost:8080/usuario/perfil/biblioteca?idReceived=${userId}`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profileTableBody = document.getElementById("servicesTableBody");
+            data.forEach(request => {
+                const formattedPrice = request.price.toFixed(2);
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                <td>${request.deliverDate}</td>
+                <td>${request.name}</td>
+                <td>${request.status.replace("_", " ")}</td>
+                <td>R$ ${formattedPrice}</td>
+                <td>${request.due}</td>
+                <td><button onclick="deleteRow(this)">Excluir</button></td>
+            `;
+                    profileTableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("Erro ao buscar a biblioteca do usuário:", error);
+            alert("Houve um erro ao carregar a biblioteca. Tente novamente.");
+        });
+}
+
+function deleteRow(button) {
+    
+    confirmedDeleteRow();
+}
+
+async function confirmedDeleteRow() {
+    
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     fetchUserData();
+    fetchAcquiredServices();
 });

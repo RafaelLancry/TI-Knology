@@ -4,11 +4,22 @@ import br.com.ti_knology.DTO.UserConnectionDTO;
 import br.com.ti_knology.DTO.UserInfoDTO;
 import br.com.ti_knology.DTO.UserProfileDTO;
 import br.com.ti_knology.DTO.UserUpdateDTO;
+import br.com.ti_knology.model.Cart;
+import br.com.ti_knology.model.Purchase;
+import br.com.ti_knology.model.Service;
 import br.com.ti_knology.model.User;
+import br.com.ti_knology.repository.CartRepository;
+import br.com.ti_knology.repository.PurchaseRepository;
 import br.com.ti_knology.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @RestController()
 @CrossOrigin(origins = "*")
@@ -16,6 +27,10 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PurchaseRepository purchaseRepository;
+    @Autowired
+    CartRepository cartRepository;
 
     @GetMapping("/login")
     public ResponseEntity<UserInfoDTO> loginUser(@RequestParam String email, @RequestParam String password){
@@ -57,5 +72,20 @@ public class UsuarioController {
         }else{
             return ResponseEntity.ok().body(new UserProfileDTO(foundUser.getName(), foundUser.getPhone(), foundUser.getEmail(), foundUser.getBirthdate()));
         }
+    }
+
+    @GetMapping("/perfil/biblioteca")
+    public ResponseEntity<Object[]> bibliotecaUser(@RequestParam String idReceived){
+        Cart cart = cartRepository.findByUserId(Long.parseLong(idReceived));
+        List<Service> servicesAdquiridos = new java.util.ArrayList<>(List.of());
+        List<Purchase> compras = purchaseRepository.findAllByCart(cart);
+        Purchase[] comprasArray = new Purchase[compras.size()];
+        compras.toArray(comprasArray);
+        for(Purchase compra : comprasArray){
+            servicesAdquiridos.add(compra.getService());
+        }
+
+        //List<ServicePurchases> servicePurchases
+        return ResponseEntity.ok().body(servicesAdquiridos.toArray());
     }
 }

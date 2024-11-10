@@ -17,7 +17,7 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO service (name, status, price, due, deliver_date, category_id) VALUES (:name, CAST(:status AS status), :price, :due, :deliverDate, :categoryId)", nativeQuery = true)
-    void insertService(@Param("name") String name,
+    int insertService(@Param("name") String name,
                        @Param("status") String status,
                        @Param("price") Float price,
                        @Param("due") Integer due,
@@ -31,4 +31,6 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Modifying
     @Query(value = "UPDATE service SET status=CAST(:status AS status) where id=:id", nativeQuery = true)
     void updateServiceStatusById(@Param("id") long id, @Param("status") String status);
+
+    void findById(long id);
 }
