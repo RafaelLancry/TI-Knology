@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ServiceWeb
+  datasource:
+    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres?user=postgres.uaeomhcdcwxvleujfykd&password=scfuHDQNXsp2kyC0
+  jpa:
+    show-sql: true

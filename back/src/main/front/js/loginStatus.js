@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (userNameElement) {
         userNameElement.textContent = localStorage.getItem("userName") || "Usuário não identificado";
     }
-    if (userEmailElement) {
-        userEmailElement.textContent = localStorage.getItem("userEmail") || "Email não identificado";
-    }
 
     const logoutLink = document.getElementById("logoutLink");
     if (logoutLink) {
@@ -21,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const serviceContractLink = document.getElementById("serviceContractLink");
     if (serviceContractLink) {
         serviceContractLink.style.display = isLoggedIn ? "block" : "none";
+        profileLink.style.display = isLoggedIn ? "block" : "none";
     }
 
     const loginLink = document.getElementById("loginLink");
@@ -39,5 +37,5 @@ function logout() {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
     localStorage.removeItem("userEmail");
-    window.location.href = "../index.html";
+    window.location.href = "../pages/index.html";
 }

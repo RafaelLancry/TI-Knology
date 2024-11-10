@@ -1,0 +1,7 @@
+CREATE TYPE Status AS ENUM (
+    'ANALISE',
+    'PRODUZINDO',
+    'PAUSADO',
+    'CANCELADO',
+    'CONCLUIDO'
+);

@@ -207,18 +207,34 @@ function validateRegistration() {
         name: nameInput.value,
         cpf: cpfInput.value.replace(/\D/g, ""),
         birthDate: birthDateInput.value,
-        phone: phoneInput.value.replace(/\D/g, ""),
-        civilStatus: document.querySelector("input[name='civilStatus']:checked").value,
-        education: document.getElementById("education").value
+        phone: phoneInput.value.replace(/\D/g, "")
     };
+
+    console.log(userData);
 
     saveUserData(userData);
 }
 
-function saveUserData(userData) {
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    users.push(userData);
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Usuário cadastrado com sucesso!");
+async function saveUserData(userData) {
+    await fetch("http://localhost:8080/usuario/registro",
+    {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            birthdate: userData.birthDate,
+            cpf: userData.cpf,
+            email: userData.email,
+            name: userData.name,
+            password: userData.password,
+            phone: userData.phone
+        }),
+    })
+    .then(function (res) {console.log(res) })
+    .catch(function (res) { console.log(res) })
+
+
     window.location.href = "login.html";
 }

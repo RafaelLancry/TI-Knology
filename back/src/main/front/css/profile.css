@@ -1,0 +1,138 @@
+/* Estilos básicos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #004085;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    color: #ffd700;
+}
+
+/* Estilo para a seção de dados pessoais */
+.profile-section {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    background-color: #004085;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.profile-content label {
+    font-weight: bold;
+    color: #004085;
+}
+
+.profile-content p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Estilo para o input de upload de imagem */
+input[type="file"] {
+    display: block;
+    margin: 10px auto;
+    font-size: 16px;
+}
+
+/* Estilo para a seção de serviços contratados */
+.services-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.services-section h2 {
+    background-color: #004085;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para a tabela de serviços */
+.services-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.services-section th, .services-section td {
+    padding: 7px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.services-section th {
+    background-color: #004085;
+    color: white;
+    font-weight: bold;
+}
+
+.services-section tr:hover {
+    background-color: #f4f4f4;
+}
+
+/* Estilos de responsividade */
+@media (max-width: 768px) {
+    .profile-section, .services-section {
+        padding: 15px;
+    }
+
+    .services-section table th, .services-section table td {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: #333;
+    color: #ddd;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 30px;
+}

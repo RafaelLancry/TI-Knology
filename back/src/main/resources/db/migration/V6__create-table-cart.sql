@@ -1,0 +1,5 @@
+CREATE TABLE "purchase" (
+    cart_id BIGINT REFERENCES cart(id) ON DELETE CASCADE,
+    purchase_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    service_id BIGINT REFERENCES service(id) ON DELETE CASCADE
+);
