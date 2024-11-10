@@ -1,5 +1,4 @@
 let services = {}; // Variável para armazenar serviços carregados
-console.log(services)
 
 // Função para buscar serviços da API
 async function fetchServices() {
@@ -60,6 +59,7 @@ function addRequest() {
     }
 
     const serviceDetails = services.find(service => service.name === serviceType);
+    
     date = new Date().toISOString().split('T')[0]
     const request = {
         date: date,
@@ -186,7 +186,7 @@ function selectPaymentMethod(method) {
     document.getElementById("qrCodePix").style.display = method === "pix" ? "block" : "none";
 }
 
-function finalizarCompra() {
+async function finalizarCompra() {
     const serviceRequests = JSON.parse(localStorage.getItem("serviceRequests") || "[]");
 
     // Verifica se existem solicitações para finalizar a compra
@@ -210,19 +210,30 @@ function finalizarCompra() {
 
     // Prepare os dados para enviar
     const paymentData = {
-        services: serviceRequests,
-        paymentDetails: cardData,
-        userId: localStorage.getItem("userId") // Inclui os detalhes do cartão
+        userId: localStorage.getItem("userId"), // ID do usuário
+        servicesId: [] // Array para armazenar os IDs dos serviços
     };
+    
+    // Preenche o array servicesId com os IDs dos serviços selecionados na tabela
+    serviceRequests.forEach(request => {
+        paymentData.servicesId.push(String(request.id));
+    });
 
+    console.log(JSON.stringify({
+        userId: paymentData.userId,
+        servicesId: paymentData.servicesId }));
+    let data;
     // Faz o fetch para enviar os dados de pagamento
-    fetch("http://localhost:8080/services/payment", {
+    await fetch("http://localhost:8080/services/payment", {
         method: "POST",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(paymentData) // Converte o objeto em JSON
+        body: JSON.stringify({
+            userId: paymentData.userId,
+            servicesId: paymentData.servicesId 
+        }),
     })
     .then(response => {
         if (!response.ok) {
@@ -230,22 +241,25 @@ function finalizarCompra() {
         }
         console.log(response);
         return response.json(); // Retorna a resposta em JSON
-    }).then(data =>{
-        console.log(data);
+    }).then((data) =>{
+        console.log("DATA: ", data)
         for(let i = 0; i<services.length; i++){
-            if(services[i].name === data[i].name){
+            if(services[i].name === data[i]?.name){
                 services[i] = data[i];
+                services[i].status = "EM ELABORAÇÃO";
             }
         }
     })
-
+    
+    console.log(services)
     localStorage.removeItem("serviceRequests");
     renderServiceRequests(); // Atualiza a tabela
     updatePartialValue(); // Atualiza o valor parcial
     closePaymentModal(); // Fecha o modal de pagamento
     alert("Compra finalizada com sucesso!");
-
 }
+
+
 // Evento para carregar dados ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
     fetchUserData();

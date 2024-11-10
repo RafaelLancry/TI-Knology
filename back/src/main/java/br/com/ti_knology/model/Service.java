@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "services")
+@Table(name = "service")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -24,7 +24,7 @@ public class Service {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.AGUARDANDO_PAGAMENTO; // Valor padrão
+    private Status status = Status.ANALISE; // Valor padrão
 
     private Float price;
 
@@ -44,5 +44,18 @@ public class Service {
         this.due = due;
         this.deliverDate = deliverDate;
         this.category = category;
+    }
+
+    public Service(String name, Long id, Category category, Float price, Integer due, Date deliverDate, Status status) {
+    }
+
+    public Service(Service newService) {
+        this.id = newService.id;
+        this.name = newService.name;
+        this.status = newService.status;
+        this.price = newService.price;
+        this.due = newService.due;
+        this.deliverDate = newService.deliverDate;
+        this.category = newService.category;
     }
 }

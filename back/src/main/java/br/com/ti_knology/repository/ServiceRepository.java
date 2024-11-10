@@ -16,7 +16,7 @@ import java.util.List;
 public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO services (name, status, price, due, deliver_date, category_id) VALUES (:name, CAST(:status AS status), :price, :due, :deliverDate, :categoryId)", nativeQuery = true)
+    @Query(value = "INSERT INTO service (name, status, price, due, deliver_date, category_id) VALUES (:name, CAST(:status AS status), :price, :due, :deliverDate, :categoryId)", nativeQuery = true)
     void insertService(@Param("name") String name,
                        @Param("status") String status,
                        @Param("price") Float price,
@@ -24,13 +24,11 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
                        @Param("deliverDate") Date deliverDate,
                        @Param("categoryId") Long categoryId);
 
-    @Query(value = "SELECT * FROM services", nativeQuery = true)
+    @Query(value = "SELECT * FROM service", nativeQuery = true)
     List<Service> findAllServices();
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE services SET status=CAST(:status AS status) where id=:id", nativeQuery = true)
+    @Query(value = "UPDATE service SET status=CAST(:status AS status) where id=:id", nativeQuery = true)
     void updateServiceStatusById(@Param("id") long id, @Param("status") String status);
-
-    public Service getById(Long id);
 }
