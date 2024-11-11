@@ -13,15 +13,5 @@ public record UserUpdateDTO(
         String email,
 
         @NotBlank
-        String password,
-
-        @NotBlank
-        String phone,
-
-        @NotBlank
-        @Pattern(regexp="\\d{11}")
-        String cpf,
-
-        @NotBlank
-        Date birthdate) {
-}
+        String phone
+){}

@@ -11,14 +11,13 @@ async function changePassword() {
     }
 
     try {
-        const response = await fetch(`http://localhost:8080/usuario/trocarSenha`, {
+        const response = await fetch(`http://localhost:8080/usuario/trocarSenha?idReceived=${userId}`, {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                userId: userId,
                 currentPassword: currentPassword,
                 newPassword: newPassword
             })

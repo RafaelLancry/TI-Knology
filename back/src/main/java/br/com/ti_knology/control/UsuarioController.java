@@ -4,19 +4,15 @@ import br.com.ti_knology.DTO.*;
 import br.com.ti_knology.enums.ServicesType;
 import br.com.ti_knology.model.Cart;
 import br.com.ti_knology.model.Purchase;
-import br.com.ti_knology.model.Service;
 import br.com.ti_knology.model.User;
 import br.com.ti_knology.repository.CartRepository;
 import br.com.ti_knology.repository.PurchaseRepository;
 import br.com.ti_knology.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController()
@@ -50,7 +46,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<UserConnectionDTO> loginUser(@RequestParam String idReceived){
+    public ResponseEntity<UserConnectionDTO> confirmLogin(@RequestParam String idReceived){
         Long id = Long.parseLong(idReceived);
         User foundUser = userRepository.getUserById(id);
         if(foundUser == null){
@@ -60,8 +56,9 @@ public class UsuarioController {
         }
     }
 
+    @Transactional
     @PostMapping("/registro")
-    public void registerUser(@RequestBody UserUpdateDTO user) {
+    public void registerUser(@RequestBody UserStartBdDTO user) {
         userRepository.save(new User(user));
     }
 
@@ -94,5 +91,51 @@ public class UsuarioController {
 
         //List<ServicePurchases> servicePurchases
         return ResponseEntity.ok().body(servicesAdquiridos.toArray(new ServiceProfileSendDTO[0]));
+    }
+
+    @Transactional
+    @PutMapping("/atualizar")
+    public ResponseEntity<String> updateUser(@RequestBody UserUpdateDTO user, @RequestParam String userId){
+        Long id = Long.parseLong(userId);
+        User foundUser = userRepository.getUserById(id);
+        if(foundUser == null){
+            return null;
+        }else {
+            foundUser.atualizarInformacoes(user);
+        }
+
+        return ResponseEntity.ok().body("Edição realizada com sucesso!");
+    }
+
+    @Transactional
+    @PutMapping("/trocarSenha")
+    public ResponseEntity<String> updateUser(@RequestBody UserPasswordUpdateDTO user, @RequestParam String idReceived){
+        Long id = Long.parseLong(idReceived);
+        User foundUser = userRepository.getUserById(id);
+        if(foundUser == null){
+            return null;
+        }else {
+            int req = foundUser.atualizarSenha(user);
+            if(req == 0){
+                return ResponseEntity.badRequest().body("Houve uma falha na edição.");
+            }else{
+                return ResponseEntity.ok().body("Edição realizada com sucesso!");
+            }
+        }
+    }
+
+    @Transactional
+    @DeleteMapping("/deletar")
+    public ResponseEntity<String> deleteUser(@RequestParam String idReceived){
+        Long id = Long.parseLong(idReceived);
+        User foundUser = userRepository.getUserById(id);
+        Cart cart = cartRepository.findByUserId(id);
+        if(foundUser == null){
+            return null;
+        }else {
+            cartRepository.delete(cart);
+            userRepository.delete(foundUser);
+        }
+        return ResponseEntity.ok().body("Edição realizada com sucesso!");
     }
 }
