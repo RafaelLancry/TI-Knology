@@ -1,9 +1,7 @@
 package br.com.ti_knology.control;
 
-import br.com.ti_knology.DTO.UserConnectionDTO;
-import br.com.ti_knology.DTO.UserInfoDTO;
-import br.com.ti_knology.DTO.UserProfileDTO;
-import br.com.ti_knology.DTO.UserUpdateDTO;
+import br.com.ti_knology.DTO.*;
+import br.com.ti_knology.enums.ServicesType;
 import br.com.ti_knology.model.Cart;
 import br.com.ti_knology.model.Purchase;
 import br.com.ti_knology.model.Service;
@@ -38,6 +36,10 @@ public class UsuarioController {
         if(foundUser == null){
             return null;
         }else{
+            if(cartRepository.findByUserId(foundUser.getId()) == null){
+                cartRepository.save(new Cart(foundUser));
+            }
+
             if(foundUser.getPassword().equals(password)){
                 var response = new UserInfoDTO(foundUser.getName(), foundUser.getPhone(), foundUser.getEmail(), foundUser.getCpf(), foundUser.getId());
                 return ResponseEntity.ok().body(response);
@@ -75,17 +77,22 @@ public class UsuarioController {
     }
 
     @GetMapping("/perfil/biblioteca")
-    public ResponseEntity<Object[]> bibliotecaUser(@RequestParam String idReceived){
+    public ResponseEntity<ServiceProfileSendDTO[]> bibliotecaUser(@RequestParam String idReceived){
         Cart cart = cartRepository.findByUserId(Long.parseLong(idReceived));
-        List<Service> servicesAdquiridos = new java.util.ArrayList<>(List.of());
+        List<ServiceProfileSendDTO> servicesAdquiridos = new java.util.ArrayList<ServiceProfileSendDTO>();
         List<Purchase> compras = purchaseRepository.findAllByCart(cart);
         Purchase[] comprasArray = new Purchase[compras.size()];
         compras.toArray(comprasArray);
         for(Purchase compra : comprasArray){
-            servicesAdquiridos.add(compra.getService());
+            ServiceProfileSendDTO addService = new ServiceProfileSendDTO(
+                    compra.getService().getDeliverDate(),
+                    ServicesType.fromRawValue(compra.getService().getName()).getValue(),
+                    compra.getService().getStatus(), compra.getService().getPrice(), compra.getService().getDue());
+
+            servicesAdquiridos.add(addService);
         }
 
         //List<ServicePurchases> servicePurchases
-        return ResponseEntity.ok().body(servicesAdquiridos.toArray());
+        return ResponseEntity.ok().body(servicesAdquiridos.toArray(new ServiceProfileSendDTO[0]));
     }
 }

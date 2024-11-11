@@ -44,6 +44,7 @@ async function fetchUserData() {
         dataReturn = data;
     }).catch( error => {
         alert("Credenciais inválidas. Tente novamente.");
+        window.location.href = "login.html";
     })
 
     userDataValidation(dataReturn)
@@ -60,7 +61,7 @@ async function fetchAcquiredServices(){
 
     if (!userId) {
         alert("ID do usuário não encontrado. Você precisa fazer login.");
-        return;
+        window.location.href = "login.html";
     }
 
     fetch(`http://localhost:8080/usuario/perfil/biblioteca?idReceived=${userId}`, {
@@ -80,11 +81,14 @@ async function fetchAcquiredServices(){
             const profileTableBody = document.getElementById("servicesTableBody");
             data.forEach(request => {
                 const formattedPrice = request.price.toFixed(2);
+                const date = new Date(request.deliverDate);
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = date.toLocaleDateString('pt-BR', options);
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                <td>${request.deliverDate}</td>
+                <td>${formattedDate}</td>
                 <td>${request.name}</td>
-                <td>${request.status.replace("_", " ")}</td>
+                <td>${request.status}</td>
                 <td>R$ ${formattedPrice}</td>
                 <td>${request.due}</td>
                 <td><button onclick="deleteRow(this)">Excluir</button></td>

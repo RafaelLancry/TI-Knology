@@ -5,6 +5,7 @@ import br.com.ti_knology.enums.ServicesType;
 import br.com.ti_knology.enums.Status;
 import br.com.ti_knology.model.*;
 import br.com.ti_knology.repository.*;
+import br.com.ti_knology.util.InsertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -25,9 +26,14 @@ public class StartBd implements CommandLineRunner {
     private CartRepository cartRepository;
     @Autowired
     private PurchaseRepository purchaseRepository;
+    @Autowired
+    private InsertUtils insertUtils;
+
+
 
     @Override
     public void run(String... args) {
+
         // Verifica se já existem categorias no banco de dados
         if (categoryRepository.count() == 0) {
             // Adiciona categorias
@@ -40,19 +46,18 @@ public class StartBd implements CommandLineRunner {
 
         if (serviceRepository.count() == 0) {
             // Obtém as categorias
-            Category categoryDev = categoryRepository.findByName("Desenvolvimento");
-            Category categoryConsultoria = categoryRepository.findByName("Consultoria");
+            Category categoryDev = categoryRepository.findById(1L).get();
+            Category categoryConsultoria = categoryRepository.findById(2L).get();
 
             // Adiciona serviços
-            serviceRepository.insertService(ServicesType.DESENVOLVIMENTO_DE_SOFTWARE.getValue(), Status.ANALISE.name(), 5000.00F, 30, null, categoryDev.getId());
-            serviceRepository.insertService(ServicesType.CONSULTORIA_EM_TI.getValue(), Status.ANALISE.name(), 3000.00F, 15, null, categoryConsultoria.getId());
-            serviceRepository.insertService(ServicesType.SOLUCOES_EM_NUVEM.getValue(), Status.ANALISE.name(), 4000.00F, 20, null, categoryConsultoria.getId());
-            serviceRepository.insertService(ServicesType.DESENVOLVIMENTO_PERSONALIZADO.getValue(), Status.ANALISE.name(), 8000.00F, 45, null, categoryDev.getId());
-            serviceRepository.insertService(ServicesType.CONSULTORIA_TRANSFORMACAO.getValue(), Status.ANALISE.name(), 7000.00F, 25, null, categoryConsultoria.getId());
-            serviceRepository.insertService(ServicesType.INTELIGENCIA_ARTIFICIAL.getValue(), Status.ANALISE.name(), 12000.00F, 60, null, categoryDev.getId());
-            serviceRepository.insertService(ServicesType.SOLUCAO_IOT.getValue(), Status.ANALISE.name(), 9000.00F, 50, null, categoryConsultoria.getId());
-            serviceRepository.insertService(ServicesType.SOLUCOES_EMBARCADAS.getValue(), Status.ANALISE.name(), 700000.00F, 365, null, categoryConsultoria.getId());
-
+            Long id1 = insertUtils.insertService(ServicesType.DESENVOLVIMENTO_DE_SOFTWARE.getValue(), Status.ANALISE.name(), 5000.00F, 30, null, categoryDev);
+            Long id2 = insertUtils.insertService(ServicesType.CONSULTORIA_EM_TI.getValue(), Status.ANALISE.name(), 3000.00F, 15, null, categoryConsultoria);
+            Long id3 = insertUtils.insertService(ServicesType.SOLUCOES_EM_NUVEM.getValue(), Status.ANALISE.name(), 4000.00F, 20, null, categoryConsultoria);
+            Long id4 = insertUtils.insertService(ServicesType.DESENVOLVIMENTO_PERSONALIZADO.getValue(), Status.ANALISE.name(), 8000.00F, 45, null, categoryDev);
+            Long id5 = insertUtils.insertService(ServicesType.CONSULTORIA_TRANSFORMACAO.getValue(), Status.ANALISE.name(), 7000.00F, 25, null, categoryConsultoria);
+            Long id6 = insertUtils.insertService(ServicesType.INTELIGENCIA_ARTIFICIAL.getValue(), Status.ANALISE.name(), 12000.00F, 60, null, categoryDev);
+            Long id7 = insertUtils.insertService(ServicesType.SOLUCAO_IOT.getValue(), Status.ANALISE.name(), 9000.00F, 50, null, categoryConsultoria);
+            Long id8 = insertUtils.insertService(ServicesType.SOLUCOES_EMBARCADAS.getValue(), Status.ANALISE.name(), 700000.00F, 365, null, categoryConsultoria);
             System.out.println("Serviços adicionados ao banco de dados.");
         }
 

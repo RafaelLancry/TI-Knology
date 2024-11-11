@@ -47,7 +47,7 @@ function handleRedirect(user){
         localStorage.setItem("isLoggedIn", true);
         localStorage.setItem("userName", user.name);
         localStorage.setItem("userId", user.id);
-        window.location.href = "../pages/index.html";
+        window.location.href = "../index.html";
     }
 }
 
