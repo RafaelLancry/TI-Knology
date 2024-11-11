@@ -11,7 +11,7 @@
     <header>
         <h1>Perfil do Usuário</h1>
         <nav>
-            <a href="../pages/index.html" class="header-link">Página Inicial</a>
+            <a href="../index.html" class="header-link">Página Inicial</a>
             <a href="../pages/login.html" onclick="logout()" class="header-link">Logout</a>
         </nav>
     </header>
@@ -22,7 +22,6 @@
             <div class="profile-content">
                 <label for="userName">Nome:</label>
                 <p id="userName">Nome do Usuário</p>
-                
                 <label for="userEmail">Email:</label>
                 <p id="userEmail">email@exemplo.com</p>
             </div>
@@ -32,8 +31,8 @@
             <h2>Serviços Contratados</h2>
             <table>
                 <thead>
-                    <tr>
-                        <th>Data</th>
+                    <tr class="service-table-header">
+                        <th>Data de Entrega</th>
                         <th>Serviço</th>
                         <th>Status</th>
                         <th>Preço</th>

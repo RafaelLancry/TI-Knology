@@ -14,15 +14,6 @@ import java.util.List;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO service (name, status, price, due, deliver_date, category_id) VALUES (:name, CAST(:status AS status), :price, :due, :deliverDate, :categoryId)", nativeQuery = true)
-    int insertService(@Param("name") String name,
-                       @Param("status") String status,
-                       @Param("price") Float price,
-                       @Param("due") Integer due,
-                       @Param("deliverDate") Date deliverDate,
-                       @Param("categoryId") Long categoryId);
 
     @Query(value = "SELECT * FROM service", nativeQuery = true)
     List<Service> findAllServices();

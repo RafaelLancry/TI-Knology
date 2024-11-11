@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Getter
+@Setter
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +31,8 @@ public class Service {
     @Setter(AccessLevel.PUBLIC)
     private Date deliverDate;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
     private Category category; // Relacionamento com Category
 
     public Service(Category category, Date deliverDate, int due,  String name, Float price, String status) {
@@ -43,16 +44,7 @@ public class Service {
         this.category = category;
     }
 
-    public Service(String name, Long id, Category category, Float price, Integer due, Date deliverDate, Status status) {
-    }
-
-    public Service(Service newService) {
-        this.id = newService.id;
-        this.name = newService.name;
-        this.status = newService.status;
-        this.price = newService.price;
-        this.due = newService.due;
-        this.deliverDate = newService.deliverDate;
-        this.category = newService.category;
+    public Service(String name, String status, Float price, Integer due, Date deliverDate, Category category) {
+        new Service(category, deliverDate, due, name, price, status);
     }
 }

@@ -2,6 +2,8 @@ package br.com.ti_knology.enums;
 
 import lombok.Getter;
 
+import java.util.Objects;
+
 public enum ServicesType {
     DESENVOLVIMENTO_DE_SOFTWARE("Desenvolvimento de Software", 1L),
     CONSULTORIA_EM_TI("Consultoria em TI", 2L),
@@ -33,9 +35,19 @@ public enum ServicesType {
         throw new IllegalArgumentException("No enum constant for value: " + value);
     }
 
+    // Método para obter um Status a partir de seu valor
+    public static ServicesType fromRawValue(String value) {
+        for (ServicesType servicesType : ServicesType.values()) {
+            if (Objects.equals(servicesType.toString(), value)) {
+                return servicesType;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant for value: " + value);
+    }
+
     public static ServicesType fromId(Long id) {
         for (ServicesType servicesType : ServicesType.values()) {
-            if (servicesType.getId().equals(id)) {
+            if(servicesType.getId().equals(id)) {
                 return servicesType;
             }
         }

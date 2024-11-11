@@ -61,6 +61,14 @@ header h1 {
     margin-bottom: 15px;
 }
 
+.service-table-header th {
+    text-align: center;
+}
+
+.service-table-header tr {
+    display: flex !important;
+}
+
 /* Estilo para o input de upload de imagem */
 input[type="file"] {
     display: block;
@@ -106,6 +114,7 @@ input[type="file"] {
     background-color: #004085;
     color: white;
     font-weight: bold;
+    flex-wrap: wrap;
 }
 
 .services-section tr:hover {
