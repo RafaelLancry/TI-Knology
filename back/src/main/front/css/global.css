@@ -5,6 +5,37 @@
     box-sizing: border-box;
 }
 
+/* Cabeçalho */
+header {
+    background-color: #004085;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #ffd700;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
@@ -26,43 +57,6 @@ main {
     flex-wrap: wrap; /* Permite que as seções quebrem linha se necessário */
     gap: 10px; /* Espaço entre as seções */
     justify-content: center; /* Centraliza as seções */
-}
-
-/* Cabeçalho */
-header {
-    background-color: #004085;
-    color: #fff;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header img {
-    max-width: 120px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-header h1 {
-    font-size: 2rem;
-    margin: 10px 0;
-    letter-spacing: 1px;
-}
-
-header nav a {
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-header nav a:hover {
-    color: #ffd700;
 }
 
 /* Estilos para as Seções */

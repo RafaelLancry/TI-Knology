@@ -1,0 +1,146 @@
+/* Estilos gerais da página de edição de perfil */
+body {
+    background-color: #f0f2f5;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #004085;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    color: #ffd700;
+}
+
+/* Estilo para a imagem do logo no lado esquerdo */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
+header img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
+/* Estilo para o formulário de edição de perfil */
+.profile-section {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    background-color: #004085;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para os campos do formulário */
+#profileForm label {
+    display: block;
+    font-weight: bold;
+    color: #004085;
+    margin-bottom: 5px;
+}
+
+#profileForm input[type="text"],
+#profileForm input[type="email"],
+#profileForm input[type="password"],
+#profileForm input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#profileForm input[type="text"]:focus,
+#profileForm input[type="email"]:focus,
+#profileForm input[type="password"]:focus,
+#profileForm input[type="tel"]:focus {
+    border-color: #004085;
+    outline: none;
+}
+
+/* Estilos para os botões */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #004085;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Mensagem de status */
+#profileMessage {
+    font-size: 14px;
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .profile-section {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

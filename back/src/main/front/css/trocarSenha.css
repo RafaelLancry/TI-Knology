@@ -1,0 +1,131 @@
+/* Estilos da página de troca de senha */
+body {
+    background-color: #f0f2f5;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #004085;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.header-link:hover {
+    color: #ffd700;
+}
+
+.password-section {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#passwordForm label {
+    display: block;
+    font-weight: bold;
+    color: #004085;
+    margin-bottom: 5px;
+}
+
+#passwordForm input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #004085;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+#passwordMessage {
+    font-size: 14px;
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#passwordInstructions {
+    background-color: #e7f1ff;
+    color: #004085;
+    padding: 10px;
+    border: 1px solid #b8daff;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+#passwordInstructions ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 14px;
+}
+
+#passwordInstructions li {
+    margin: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+#passwordInstructions .valid {
+    color: #28a745; /* Verde para requisito atendido */
+}
+
+#passwordInstructions .invalid {
+    color: #ff4d4d; /* Vermelho para requisito não atendido */
+}
+
+#passwordInstructions .valid::before,
+#passwordInstructions .invalid::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
