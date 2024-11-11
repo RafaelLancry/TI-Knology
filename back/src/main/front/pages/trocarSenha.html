@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocar Senha</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/trocarSenha.css">
+</head>
+<body>
+    <header>
+        <img src="../img/Logo.jpg" alt="Logo da Empresa">
+        <h1>Trocar Senha</h1>
+        <nav>
+            <a href="editarPerfil.html" class="header-link">Voltar ao Perfil</a>
+        </nav>
+    </header>
+    <main>
+        <section class="password-section">
+            <form id="passwordForm">
+                <label for="currentPassword">Senha Atual:</label>
+                <input type="password" id="currentPassword" required>
+
+                <label for="newPassword">Nova Senha:</label>
+                <input type="password" id="newPassword" placeholder="Digite sua nova senha" required oninput="validatePasswordRequirements()">
+
+                <div id="passwordInstructions">
+                    A senha deve atender aos seguintes requisitos:
+                    <ul>
+                        <li id="lengthRequirement" class="invalid">Pelo menos 8 caracteres</li>
+                        <li id="numberRequirement" class="invalid">Pelo menos um número</li>
+                        <li id="uppercaseRequirement" class="invalid">Pelo menos uma letra maiúscula</li>
+                        <li id="lowercaseRequirement" class="invalid">Pelo menos uma letra minúscula</li>
+                        <li id="specialCharRequirement" class="invalid">Pelo menos um caractere especial (@, #, $, %, &)</li>
+                    </ul>
+                </div>
+
+                <label for="confirmPassword">Confirmar Nova Senha:</label>
+                <input type="password" id="confirmPassword" placeholder="Confirme sua nova senha" required>
+
+                <button type="button" onclick="changePassword()">Alterar Senha</button>
+            </form>
+            <p id="passwordMessage"></p>
+        </section>
+    </main>
+    <script src="../js/trocarSenha.js"></script>
+</body>
+</html>

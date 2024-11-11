@@ -146,7 +146,7 @@ async function fetchUserData() {
 }
 
 function userDataValidation(data){
-    document.getElementById("userName").textContent = `Login: ${data.name}`;
+    document.getElementById("userName").textContent = `Seja bem vindo ${data.name}!`;
 }
 
 

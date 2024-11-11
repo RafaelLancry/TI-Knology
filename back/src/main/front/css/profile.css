@@ -32,6 +32,24 @@ header h1 {
     color: #ffd700;
 }
 
+/* Estilo para a imagem do logo no lado esquerdo */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
+header img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
 /* Estilo para a seção de dados pessoais */
 .profile-section {
     max-width: 600px;

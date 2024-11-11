@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição de Perfil</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/profileEdit.css">
+</head>
+<body>
+    <header>
+        <img src="../img/Logo.jpg" alt="Logo da Empresa">
+        <h1>Editar Perfil</h1>
+        <nav>
+            <a href="../pages/index.html" class="header-link">Página Inicial</a>
+            <a href="../pages/service_requests.html" class="header-link">Contratar Serviço</a>
+            <a href="login.html" onclick="logout()" class="header-link">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section class="profile-section">
+            <h2>Dados Pessoais</h2>
+            <form id="profileForm">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" placeholder="(00) 00000-0000">
+
+                <button type="button" onclick="updateProfile()">Salvar Alterações</button>
+                <button type="button" onclick="confirmDeleteAccount()">Excluir Conta</button>
+                <button type="button" style="background-color: #ccc; color: #333;" onclick="window.location.href='trocarSenha.html'">Trocar Senha</button>
+            </form>
+            <p id="profileMessage"></p>
+        </section>
+    </main>
+    <script src="../js/profileEdit.js"></script>
+</body>
+</html>

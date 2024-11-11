@@ -1,3 +1,10 @@
+/* Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Estilo básico para todo o corpo */
 body {
     font-family: Arial, sans-serif;
@@ -9,42 +16,62 @@ body {
 
 /* Cabeçalho */
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #004085;
     color: #fff;
     padding: 20px;
-    text-align: center;
-    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
+/* Estilo para a imagem do logo no lado esquerdo */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
+header img {
+    max-width: 120px;
+    height: auto;
+    
+}
+
+/* Centralização do título */
 header h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 2rem;
     margin: 0;
-    font-size: 28px;
-    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-/* Estilo para informações do usuário e navegação */
-#userName, #userEmail {
-    font-size: 14px;
-    margin: 5px 0;
-}
-
+/* Estilo para o nav */
 nav {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: flex;
+    gap: 15px;
 }
 
 .header-link {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
-    margin-left: 15px;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .header-link:hover {
-    color: #ffdd57;
+    color: #ffd700;
 }
+
 
 /* Estilização para o conteúdo principal */
 main {
