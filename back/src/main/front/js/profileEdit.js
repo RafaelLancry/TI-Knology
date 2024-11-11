@@ -35,7 +35,7 @@ async function updateProfile() {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ name, email, phone })
+            body: JSON.stringify({ name: name, email: email, phone: phone })
         });
 
         if (response.ok) {
@@ -47,6 +47,8 @@ async function updateProfile() {
         console.error("Erro ao atualizar perfil:", error);
         alert("Erro ao atualizar perfil. Tente novamente.");
     }
+
+    loadUserProfile();
 }
 
 // Função para confirmar exclusão de conta
@@ -72,7 +74,7 @@ async function deleteAccount() {
         if (response.ok) {
             alert("Conta excluída com sucesso.");
             localStorage.clear();
-            window.location.href = "register.html";
+            window.location.href = "login.html";
         } else {
             alert("Erro ao excluir conta.");
         }

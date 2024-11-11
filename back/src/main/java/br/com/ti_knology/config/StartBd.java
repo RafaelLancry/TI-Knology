@@ -1,5 +1,6 @@
 package br.com.ti_knology.config;
 
+import br.com.ti_knology.DTO.UserStartBdDTO;
 import br.com.ti_knology.DTO.UserUpdateDTO;
 import br.com.ti_knology.enums.ServicesType;
 import br.com.ti_knology.enums.Status;
@@ -71,12 +72,12 @@ public class StartBd implements CommandLineRunner {
             userData.password();
              */
             //Cria os usuários
-            User user1 = new User(new UserUpdateDTO("Davi Aleixo", "davi.davi@davi.com", "daviA@100", "81912344321", "11111111101", new Date(2000-11-18)));
-            User user2 = new User(new UserUpdateDTO("Rafael Lancry", "rafa.rafa@rafa.com", "rafaL@100", "81943211234", "22222222202", new Date(2000-10-18)));
-            User user3 = new User(new UserUpdateDTO("Julia Calado", "julia.julia@julia.com", "juliaC@100", "81912341234", "33333333303", new Date(2000-9-18)));
-            User user4 = new User(new UserUpdateDTO("Vinicius Paz", "vini.vini@vini.com", "viniP@100", "81943214321", "44444444404", new Date(2000-8-18)));
-            User user5 = new User(new UserUpdateDTO("Guilherme Marinho", "gui.gui@gui.com", "guiM@100", "81912121212", "55555555505", new Date(2000-7-18)));
-            User user6 = new User(new UserUpdateDTO("Patrick Costa", "pat.pat@pat.com", "patC@100", "81912312312", "66666666606", new Date(2000-6-18)));
+            User user1 = new User(new UserStartBdDTO("Davi Aleixo", "davi.davi@davi.com", "daviA@100", "81912344321", "11111111101", new Date(2000-11-18)));
+            User user2 = new User(new UserStartBdDTO("Rafael Lancry", "rafa.rafa@rafa.com", "rafaL@100", "81943211234", "22222222202", new Date(2000-10-18)));
+            User user3 = new User(new UserStartBdDTO("Julia Calado", "julia.julia@julia.com", "juliaC@100", "81912341234", "33333333303", new Date(2000-9-18)));
+            User user4 = new User(new UserStartBdDTO("Vinicius Paz", "vini.vini@vini.com", "viniP@100", "81943214321", "44444444404", new Date(2000-8-18)));
+            User user5 = new User(new UserStartBdDTO("Guilherme Marinho", "gui.gui@gui.com", "guiM@100", "81912121212", "55555555505", new Date(2000-7-18)));
+            User user6 = new User(new UserStartBdDTO("Patrick Costa", "pat.pat@pat.com", "patC@100", "81912312312", "66666666606", new Date(2000-6-18)));
             userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6));
 
             //Cria os carrinhos dos usuários
