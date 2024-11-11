@@ -91,7 +91,6 @@ async function fetchAcquiredServices(){
                 <td>${request.status}</td>
                 <td>R$ ${formattedPrice}</td>
                 <td>${request.due}</td>
-                <td><button onclick="deleteRow(this)">Excluir</button></td>
             `;
                     profileTableBody.appendChild(row);
             });
@@ -100,15 +99,6 @@ async function fetchAcquiredServices(){
             console.error("Erro ao buscar a biblioteca do usuário:", error);
             alert("Houve um erro ao carregar a biblioteca. Tente novamente.");
         });
-}
-
-function deleteRow(button) {
-    
-    confirmedDeleteRow();
-}
-
-async function confirmedDeleteRow() {
-    
 }
 
 document.addEventListener("DOMContentLoaded", function() {
